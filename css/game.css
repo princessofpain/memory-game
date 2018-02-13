@@ -17,10 +17,15 @@
 	background-color: #EE7621;
 }
 
-.item {
+.visible {
+	border-radius: 20px;
 	background-color: #458B74;
 	width: 150px;
 	height: 150px;
+	display: grid;
+}
+
+.hidden {
 	display: none;
 }
 
