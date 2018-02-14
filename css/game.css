@@ -34,3 +34,11 @@
 	height: 30px;
 	padding: 60px auto 60px auto;
 }
+
+.match {
+	border-radius: 20px;
+	background-color: #458B74;
+	width: 150px;
+	height: 150px;
+	display: grid;
+}
