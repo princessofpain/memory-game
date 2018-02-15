@@ -1,7 +1,6 @@
 
 const field = document.querySelector('.grid-container');
 let count = 0;
-let countAll = 0;
 let clickEvent = 0;
 clickedCardsClasses = [];
 usedCards = [];
@@ -10,11 +9,18 @@ field.addEventListener('click', changeCards);
 
 function changeCards(){
 	event.preventDefault();
-	// identification of the clicked card and the first child (item/ the other side of the card)
+	
 	const clicked = event.target;
 	clickEvent++;
-	// skipping a click event for the container
+	
 	if (clicked.classList.contains('card') === true){
+		let counter = document.querySelector('.counter');
+		if (clickEvent === 1){
+			counter.textContent = clickEvent + " move";
+		} else {
+			counter.textContent = clickEvent + " moves";
+		}
+		// identification of the clicked card and the first child (item/ the other side of the card)
 		// changing the other side of the card to be visible by changing the class in CSS	
 		item[clickEvent] = clicked.firstElementChild;
 		item[clickEvent].className = 'visible';
@@ -63,6 +69,7 @@ function changeCards(){
 		//clickEvent has to be incremented to count through the arrays (arrays store the clicked cards 
 		//and the class names)			
 	} else {
+		// skipping and erasing all unrelated clickEvents
 		clickEvent--;
 	} 		
 }
