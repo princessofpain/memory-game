@@ -13,10 +13,7 @@ function changeCards(){
 	const clicked = event.target;
 	clickEvent++;
 	// skipping a click event for the container
-	if(clicked.className === 'grid-container'){
-		alert('Click on a card to play!');
-		clickEvent--;
-	} else {
+	if (clicked.classList.contains('card') === true){
 		// changing the other side of the card to be visible by changing the class in CSS	
 		item[clickEvent] = clicked.firstElementChild;
 		item[clickEvent].className = 'visible';
@@ -58,5 +55,8 @@ function changeCards(){
 		}	
 		//clickEvent has to be incremented to count through the arrays (arrays store the clicked cards 
 		//and the class names)			
-	}		
+	} else {
+		alert('Click on a card to play!');
+		clickEvent--;
+	} 		
 }
