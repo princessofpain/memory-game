@@ -11,10 +11,11 @@ function changeCards(){
 	event.preventDefault();
 	// identification of the clicked card and the first child (item/ the other side of the card)
 	const clicked = event.target;
-
+	clickEvent++;
 	// skipping a click event for the container
 	if(clicked.className === 'grid-container'){
 		alert('Click on a card to play!');
+		clickEvent--;
 	} else {
 		// changing the other side of the card to be visible by changing the class in CSS	
 		item[clickEvent] = clicked.firstElementChild;
@@ -31,7 +32,7 @@ function changeCards(){
 		count++;
 		
 		// special action when 2 guesses were done
-		if (count == '2'){
+		if (count > 1){
 			// if the class names are different the class of the two last recently moved cards is 
 			// changed back to .hidden
 			if (clickedCardsClasses[clickEvent] != clickedCardsClasses[clickEvent-1]){
@@ -54,6 +55,5 @@ function changeCards(){
 		}	
 		//clickEvent has to be incremented to count through the arrays (arrays store the clicked cards 
 		//and the class names)			
-	}	
-	clickEvent++;
+	}		
 }
