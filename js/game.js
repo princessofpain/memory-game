@@ -1,3 +1,4 @@
+
 const field = document.querySelector('.grid-container');
 let count = 0;
 let clickEvent = 0;
@@ -13,9 +14,10 @@ function changeCards(){
 	item[clickEvent] = clicked.firstElementChild;
 	// changing the other side of the card to be visible by changing the class in CSS
 	item[clickEvent].className = 'visible';
+	console.log(item[clickEvent].className);
 
 	// getting the class name of the recently clicked card and storing it in an array
-	clickedCards[clickEvent] = clicked.classList;
+	clickedCards[clickEvent] = clicked.className;
 	// getting the clicked element and storing it in an array
 	usedCards[clickEvent] = clicked;
 	// incrementing the number of the guesses to allow max. 2
