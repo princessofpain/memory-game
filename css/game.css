@@ -15,12 +15,12 @@
 	width: 150px;
 	height: 150px;
 	background-color: #EE7621;
-	transition-property: background-color 0.2s, transform 0.2s;
+	transition: background-color 0.2s, transform 0.2s;
 	transition-duration: 0.2s;
 }
 
 .card:active {
-	background-color: #458B74;
+	background-color: #EE7621;
 	transform: rotateY(180deg);
 }
 
@@ -38,25 +38,25 @@
 
 .fail {
 	border-radius: 20px;
-	background-color: #458B74;
+	background-color: #EE7621;
 	width: 150px;
 	height: 150px;
 	display: grid;
-	animation: failMatch 2s;
+	animation: failMatch 1s;
 }
 
 @keyframes failMatch {
 	0% {
 		transform: rotate(0deg);
-		background-color: #458B74;
+		/* background-color: #458B74; */
 	}
 	33% {
 		transform: rotate(10deg);
-		background-color: #ff0000;
+		/* background-color: #ff0000; */
 	}
 	100% {
 		transform: rotate(0deg);
-		background-color: #458B74;
+		/* background-color: #EE7621; */
 	}
 }
 
@@ -78,14 +78,14 @@
 @keyframes matchedCards{
 	0% {
 		transform: scale(1);
-		background-color: #458B74;
+		/* background-color: #458B74; */
 	}
 	33% {
 		transform: scale(0.5);
-		background-color: #ffff00;
+		/* background-color: #ffff00; */
 	}
 	100% {
 		transform: scale(1);
-		background-color: #458B74;
+		/* background-color: #458B74; */
 	}
 }
