@@ -23,7 +23,9 @@ function changeCards(){
 
 		// getting the class name of the recently clicked card and the one before and storing 
 		// it in an array
-		clickedCardsClasses[clickEvent] = clicked.className;		
+		clickedCardsClasses[clickEvent] = clicked.className;	
+		const firstCardClass = clickedCardsClasses[clickEvent-1];	
+		const secondCardClass = clickedCardsClasses[clickEvent];	
 		// getting the clicked element and storing it in an array
 		usedCards[clickEvent] = clicked;
 		const firstCard = usedCards[clickEvent-1];
@@ -39,9 +41,10 @@ function changeCards(){
 				firstCard.className = 'fail';	
 				secondCard.className = 'fail';
 				setTimeout(function(){
-					console.log("I´m a break")
 					firstCard.firstElementChild.className = 'hidden';
 					secondCard.firstElementChild.className = 'hidden';	
+					firstCard.className = firstCardClass;
+					secondCard.className = secondCardClass;
 				}, 1000);				
 				// clearTimeout(timeout);
 			// if there is a match the class of the two last recently moved cards is changed to .match 
