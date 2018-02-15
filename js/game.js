@@ -1,6 +1,7 @@
 
 const field = document.querySelector('.grid-container');
 let count = 0;
+let countAll = 0;
 let clickEvent = 0;
 clickedCardsClasses = [];
 usedCards = [];
@@ -49,6 +50,12 @@ function changeCards(){
 			} else {			
 				firstCard.className = 'match';	
 				secondCard.className = 'match'; 
+
+				// show the winner message if all cards are matched
+				const leftCards = document.getElementsByClassName('card');
+				if(leftCards.length === 0){
+					gameFinished();
+				}
 			}	
 		// count has to be set to 0 to allow 2 guesses max.
 			count = 0;
@@ -56,7 +63,33 @@ function changeCards(){
 		//clickEvent has to be incremented to count through the arrays (arrays store the clicked cards 
 		//and the class names)			
 	} else {
-		alert('Click on a card to play!');
 		clickEvent--;
 	} 		
 }
+
+function gameFinished(){
+	const game = document.querySelector('.grid-container');
+	game.style.display = 'none';
+
+	const winnerMessage = document.querySelector('.winner');
+	winnerMessage.style.display = 'block';
+}
+
+// function shuffle(array) {
+//   var m = array.length, t, i;
+
+//   // While there remain elements to shuffle…
+//   while (m) {
+
+//     // Pick a remaining element…
+//     i = Math.floor(Math.random() * m--);
+
+//     // And swap it with the current element.
+//     t = array[m];
+//     array[m] = array[i];
+//     array[i] = t;
+//   }
+
+//   return array;
+// }
+

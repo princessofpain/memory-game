@@ -89,3 +89,7 @@
 		/* background-color: #458B74; */
 	}
 }
+
+.winner {
+	display: none;
+}
