@@ -1,4 +1,3 @@
-
 let count = 0;
 let clickEvent = 0;
 let clickedCardsClasses = [];
@@ -11,9 +10,7 @@ field.addEventListener('click', function(event){
 });
 
 const mix = document.querySelector('.mix-cards');
-mix.addEventListener('click', function(){
-	mixCards();
-});
+mix.addEventListener('click', mixCards);
 
 function changeCards(){
 	event.preventDefault();
@@ -22,33 +19,31 @@ function changeCards(){
 	
 	if (clicked.classList.contains('card') === true){
 		counter();
-		// identification of the clicked card and the first child (item/ the other side of the card)
+		// identification of the clicked card and the other side of the card as child
 		item[clickEvent] = clicked.firstElementChild;
 		item[clickEvent].className = 'visible';
 
-		// storing the class name of the recently clicked card and the one before
+		// storing the class name of the recently clicked card in an array
 		clickedCardsClasses[clickEvent] = clicked.className;		
-		// storing the clicked element and storing it in an array
+		// storing the clicked element in an array
 		usedCards[clickEvent] = clicked;
 
 		// incrementing the number of the guesses to allow max. 2
 		count++;
 	} else {
-		// skipping and erasing all unrelated clickEvents
+		// skipping and erasing all card-unrelated clickEvents
 		clickEvent--;
 	} 
 		
-		// special action when 2 guesses were done
+	// compare 2 guesses for giving a match or a fail
 	if (count > 1){
 		if (clickedCardsClasses[clickEvent] != clickedCardsClasses[clickEvent-1]){
 		fail();
 		} else {			
 			match();
 		}	
-	// count has to be set to 0 to allow 2 guesses max.
-		count = 0;	
-	//clickEvent has to be incremented to count through the arrays (arrays store the clicked cards 
-	//and the class names)					
+		// count has to be set to 0 to allow 2 guesses max.
+		count = 0;					
 	}
 }
 
@@ -62,27 +57,22 @@ function counter(){
 }
 
 function fail(){
-// if the class names are different the class of the two last recently moved cards is 
-	// changed back to .hidden
-		const firstCardClass = clickedCardsClasses[clickEvent-1];	
-		const secondCardClass = clickedCardsClasses[clickEvent];
+	usedCards[clickEvent-1].classList.add('fail');	
+	usedCards[clickEvent].classList.add('fail');
 
-		usedCards[clickEvent-1].className = 'fail';	
-		usedCards[clickEvent].className = 'fail';
-		setTimeout(function(){
-			usedCards[clickEvent-1].firstElementChild.className = 'hidden';
-			usedCards[clickEvent].firstElementChild.className = 'hidden';	
-			usedCards[clickEvent-1].className = firstCardClass;
-			usedCards[clickEvent].className = secondCardClass;
-		}, 1000);				
-		// clearTimeout(timeout);
-	// if there is a match the class of the two last recently moved cards is changed to .match 
-	// 	to avoid more click reactions or changes of this cards	
+	setTimeout(function(){
+		usedCards[clickEvent-1].firstElementChild.className = 'hidden';
+		usedCards[clickEvent].firstElementChild.className = 'hidden';	
+		usedCards[clickEvent-1].classList.remove('fail');
+		usedCards[clickEvent].classList.remove('fail');
+	}, 1000);					
 }
 
 function match(){
-	usedCards[clickEvent-1].className = 'match';	
-	usedCards[clickEvent].className = 'match'; 
+	console.log(usedCards[clickEvent-1].classList + " " + usedCards[clickEvent].classList);
+	usedCards[clickEvent-1].classList.add('match');	
+	usedCards[clickEvent].classList.add('match'); 
+	console.log(usedCards[clickEvent-1].classList + " " + usedCards[clickEvent].classList);
 
 	// show the winner message if all cards are matched
 	youWon();
@@ -90,25 +80,36 @@ function match(){
 
 function youWon(){
 	const leftCards = document.getElementsByClassName('card');
+
 	if(leftCards.length === 0){
-		gameFinished();
+		const game = document.querySelector('.grid-container');
+		game.style.display = 'none';
+
+		const winnerMessage = document.querySelector('.winner');
+		winnerMessage.style.display = 'block';
 	}
 }
 
-function gameFinished(firstCard, secondCard){
-	const game = document.querySelector('.grid-container');
-	game.style.display = 'none';
-
-	const winnerMessage = document.querySelector('.winner');
-	winnerMessage.style.display = 'block';
-}
-
 function mixCards() {
-	let cards = field.childNodes;
-	console.log(cards);
+	let allCards = document.querySelectorAll('.card, .match');
+	let shuffleNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
+	shuffleArray(shuffleNumbers);
 
+	// shuffle DOMTokenList by assigning a randomized array (1 - 16) to the css order property
+	for(let i = 0; i < shuffleNumbers.length; i++){
+		allCards[i].style.order = shuffleNumbers[i]; 
+		allCards[i].classList.remove('match');
+		allCards[i].firstElementChild.className = 'hidden';
+	}
 }
 
-
+// Durstenfeld shuffle for ES6
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
