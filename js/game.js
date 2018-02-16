@@ -13,7 +13,6 @@ const mix = document.querySelector('.mix-cards');
 mix.addEventListener('click', mixCards);
 
 function changeCards(){
-	event.preventDefault();
 	const clicked = event.target;
 	clickEvent++;
 	
@@ -69,21 +68,18 @@ function fail(){
 }
 
 function match(){
-	console.log(usedCards[clickEvent-1].classList + " " + usedCards[clickEvent].classList);
 	usedCards[clickEvent-1].classList.add('match');	
 	usedCards[clickEvent].classList.add('match'); 
-	console.log(usedCards[clickEvent-1].classList + " " + usedCards[clickEvent].classList);
 
 	// show the winner message if all cards are matched
 	youWon();
 }
 
 function youWon(){
-	const leftCards = document.getElementsByClassName('card');
+	const leftCards = document.getElementsByClassName('match');
 
-	if(leftCards.length === 0){
-		const game = document.querySelector('.grid-container');
-		game.style.display = 'none';
+	if(leftCards.length === 16){
+		field.style.display = 'none';
 
 		const winnerMessage = document.querySelector('.winner');
 		winnerMessage.style.display = 'block';
