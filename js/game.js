@@ -12,6 +12,13 @@ field.addEventListener('click', function(event){
 const mix = document.querySelector('.mix-cards');
 mix.addEventListener('click', mixCards);
 
+const playAgain = document.querySelector('#play-again');
+const winnerMessage = document.querySelector('.winner');
+playAgain.addEventListener('click', function(){
+	field.style.display = 'inline-grid';
+	winnerMessage.style.display = 'none';
+});
+
 function changeCards(){
 	const clicked = event.target;
 	clickEvent++;
@@ -47,7 +54,7 @@ function changeCards(){
 }
 
 function counter(){
-		let counter = document.querySelector('.counter');
+	let counter = document.querySelector('.counter');
 	if (clickEvent === 1){
 		counter.textContent = clickEvent + " move";
 	} else {
@@ -71,8 +78,10 @@ function match(){
 	usedCards[clickEvent-1].classList.add('match');	
 	usedCards[clickEvent].classList.add('match'); 
 
-	// show the winner message if all cards are matched
-	youWon();
+	// shows the winner message if all cards are matched
+	setTimeout(function(){
+		youWon();
+	}, 4500);
 }
 
 function youWon(){
@@ -81,8 +90,9 @@ function youWon(){
 	if(leftCards.length === 16){
 		field.style.display = 'none';
 
-		const winnerMessage = document.querySelector('.winner');
 		winnerMessage.style.display = 'block';
+		clickEvent = 0;
+		counter();
 	}
 }
 
