@@ -15,8 +15,10 @@ mix.addEventListener('click', mixCards);
 const playAgain = document.querySelector('#play-again');
 const winnerMessage = document.querySelector('.winner');
 playAgain.addEventListener('click', function(){
-	field.style.display = 'inline-grid';
 	winnerMessage.style.display = 'none';
+	field.style.display = 'inline-grid';
+	clickEvent = 0;
+	counter();
 });
 
 function changeCards(){
@@ -91,8 +93,6 @@ function youWon(){
 		field.style.display = 'none';
 
 		winnerMessage.style.display = 'block';
-		clickEvent = 0;
-		counter();
 	}
 }
 
@@ -108,6 +108,8 @@ function mixCards() {
 		allCards[i].classList.remove('match');
 		allCards[i].firstElementChild.className = 'hidden';
 	}
+	clickEvent = 0;
+	counter();
 }
 
 // Durstenfeld shuffle for ES6
