@@ -81,7 +81,7 @@ function match(){
 	// shows the winner message if all cards are matched
 	setTimeout(function(){
 		youWon();
-	}, 4500);
+	}, 3000);
 }
 
 function youWon(){
