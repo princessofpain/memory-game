@@ -93,3 +93,13 @@
 .winner {
 	display: none;
 }
+
+
+.mix-cards {
+	transition: transform 0.2s;
+	transition-duration: 0.2s;
+}
+
+.mix-cards:hover {
+	transform: scale(1.3);
+}

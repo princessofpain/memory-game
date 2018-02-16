@@ -1,15 +1,19 @@
 
-const field = document.querySelector('.grid-container');
-const mix = document.querySelector('.mix-cards');
 let count = 0;
 let clickEvent = 0;
-clickedCardsClasses = [];
-usedCards = [];
-item = [];
-let cards = document.querySelectorAll('.cards');
-cards = Array.prototype.slice.call(0, cards.length);
-field.addEventListener('click', changeCards);
-mix.addEventListener('click', mixCards());
+let clickedCardsClasses = [];
+let usedCards = [];
+let item = [];
+
+const field = document.querySelector('.grid-container');
+field.addEventListener('click', function(event){
+	changeCards();
+});
+
+const mix = document.querySelector('.mix-cards');
+mix.addEventListener('click', function(){
+	mixCards();
+});
 
 function changeCards(){
 	event.preventDefault();
@@ -99,22 +103,12 @@ function gameFinished(firstCard, secondCard){
 	winnerMessage.style.display = 'block';
 }
 
-// function mixCards(array) {
-//   console.log("mix");
-//   var m = array.length, t, i;
+function mixCards() {
+	let cards = field.childNodes;
+	console.log(cards);
 
-//   // While there remain elements to shuffle…
-//   while (m) {
 
-//     // Pick a remaining element…
-//     i = Math.floor(Math.random() * m--);
+}
 
-//     // And swap it with the current element.
-//     t = array[m];
-//     array[m] = array[i];
-//     array[i] = t;
-//   }
 
-//   return array;
-// }
 
