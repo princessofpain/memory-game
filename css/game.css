@@ -23,6 +23,11 @@ body {
 	margin: 0px 20px 10px;
 }
 
+.summary {
+	display:  none;
+	text-align: center;
+}
+
 .grid-container {
 	display: grid;
 	grid-template-rows: repeat(4, 150px);
@@ -30,7 +35,7 @@ body {
 	grid-row-gap: 20px;
 	grid-column-gap: 20px;
 	align-items: center;
-	background-color: red;
+	background-color: #787777;
 	padding: 20px;
 	width: 660px;
 	margin: 0 auto;
@@ -41,28 +46,25 @@ body {
 	border-radius: 20px;
 	width: 150px;
 	height: 150px;
-	background-color: #EE7621;
-	transition: background-color 0.2s, transform 0.2s;
-	transition-duration: 0.2s;
+	background-color: #a7a7a7;
+	transition: transform 0.1s;
 }
 
 .card:active {
-	background-color: #EE7621;
 	transform: rotateY(180deg);
 }
 
 .visible {
 	border-radius: 20px;
-	background-color: #458B74;
-	width: 150px;
-	height: 150px;
+	width:  150px;
+	height:  150px;
 }
 
 .icon {
 	border-radius: 20px;
-	width: 150px;
-	height: 150px;
-	z-index: 2;
+	width: 140px;
+	height: 140px;
+	margin: 5px;
 }
 
 .hidden {
@@ -70,53 +72,52 @@ body {
 }
 
 .fail {
-	border-radius: 20px;
-	background-color: #EE7621;
-	width: 150px;
-	height: 150px;
-	animation: failMatch 1s;
+	animation: failMatch 2s;
 }
 
 @keyframes failMatch {
 	0% {
 		transform: rotate(0deg);
-		/* background-color: #458B74; */
-	}
+	}	
 	33% {
-		transform: rotate(10deg);
-		/* background-color: #ff0000; */
+		transform: rotate(10deg);	
+		background-color: #C94242;		
+	} 
+	60% {
+		transform: rotate(0deg);	
+	}
+	62% {
+		transform: rotateY(0deg);
+		background-color: #a7a7a7;
 	}
 	100% {
-		transform: rotate(0deg);
-		/* background-color: #EE7621; */
+		transform: rotateY(180deg);	
 	}
 }
 
 .match {
 	border-radius: 20px;
-	background-color: #458B74;
 	width: 150px;
 	height: 150px;
 	display: grid;
 	animation: matchedCards 1s;
+	background-color: #458B74
 }
 
 @keyframes matchedCards{
 	0% {
 		transform: scale(1);
-		/* background-color: #458B74; */
 	}
 	33% {
 		transform: scale(0.5);
-		/* background-color: #ffff00; */
 	}
 	100% {
 		transform: scale(1);
-		/* background-color: #458B74; */
 	}
 }
 
 .winner {
+	padding-top: 10px;
 	display: none;
 	text-align: center;
 }
