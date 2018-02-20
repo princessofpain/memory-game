@@ -6,7 +6,8 @@ let item = [];
 
 const field = document.querySelector('.grid-container');
 field.addEventListener('click', function(event){
-	changeCards();
+	event.preventDefault();
+	storeCards();
 });
 
 const mix = document.querySelector('.mix-cards');
@@ -20,10 +21,9 @@ playAgain.addEventListener('click', function(){
 	winnerMessage.style.display = 'none';
 });
 
-function changeCards(){
+function storeCards() {	
 	const clicked = event.target;
 	clickEvent++;
-	
 	if (clicked.classList.contains('card') === true){
 		counter();
 		// identification of the clicked card and the other side of the card as child
@@ -37,11 +37,15 @@ function changeCards(){
 
 		// incrementing the number of the guesses to allow max. 2
 		count++;
+
+		twoCardsOpen();
 	} else {
 		// skipping and erasing all card-unrelated clickEvents
 		clickEvent--;
 	} 
-		
+}
+
+function twoCardsOpen(){	
 	// compare 2 guesses for giving a match or a fail
 	if (count > 1){
 		if (clickedCardsClasses[clickEvent] != clickedCardsClasses[clickEvent-1]){
@@ -72,13 +76,13 @@ function fail(){
 		usedCards[clickEvent].firstElementChild.className = 'hidden';	
 		usedCards[clickEvent-1].classList.remove('fail');
 		usedCards[clickEvent].classList.remove('fail');
-	}, 1000);					
+	}, 1100);					
 }
 
 function match(){
 	usedCards[clickEvent-1].classList.add('match');	
 	usedCards[clickEvent].classList.add('match'); 
-
+	
 	// shows the winner message if all cards are matched
 	setTimeout(function(){
 		youWon();
@@ -90,7 +94,7 @@ function youWon(){
 
 	if(leftCards.length === 16){
 		field.style.display = 'none';
-
+		document.querySelector(".header").style.display = "none";
 		winnerMessage.style.display = 'block';
 	}
 }
