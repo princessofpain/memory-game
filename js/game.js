@@ -15,10 +15,9 @@ mix.addEventListener('click', mixCards);
 const playAgain = document.querySelector('#play-again');
 const winnerMessage = document.querySelector('.winner');
 playAgain.addEventListener('click', function(){
+	mixCards();
+	field.style.display = "grid";
 	winnerMessage.style.display = 'none';
-	field.style.display = 'inline-grid';
-	clickEvent = 0;
-	counter();
 });
 
 function changeCards(){
@@ -83,7 +82,7 @@ function match(){
 	// shows the winner message if all cards are matched
 	setTimeout(function(){
 		youWon();
-	}, 3000);
+	}, 5000);
 }
 
 function youWon(){
