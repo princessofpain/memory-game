@@ -19,9 +19,10 @@ playAgain.addEventListener('click', function(){
 	mixCards();
 	field.style.display = "grid";
 	winnerMessage.style.display = 'none';
+	document.querySelector(".header").style.display = "flex";
 });
 
-function storeCards() {	
+function storeCards() {
 	const clicked = event.target;
 	clickEvent++;
 	if (clicked.classList.contains('card') === true){
@@ -31,7 +32,7 @@ function storeCards() {
 		item[clickEvent].className = 'visible';
 
 		// storing the class name of the recently clicked card in an array
-		clickedCardsClasses[clickEvent] = clicked.className;		
+		clickedCardsClasses[clickEvent] = clicked.className;
 		// storing the clicked element in an array
 		usedCards[clickEvent] = clicked;
 
@@ -42,19 +43,19 @@ function storeCards() {
 	} else {
 		// skipping and erasing all card-unrelated clickEvents
 		clickEvent--;
-	} 
+	}
 }
 
-function twoCardsOpen(){	
+function twoCardsOpen(){
 	// compare 2 guesses for giving a match or a fail
 	if (count > 1){
 		if (clickedCardsClasses[clickEvent] != clickedCardsClasses[clickEvent-1]){
 		fail();
-		} else {			
+		} else {
 			match();
-		}	
+		}
 		// count has to be set to 0 to allow 2 guesses max.
-		count = 0;					
+		count = 0;
 	}
 }
 
@@ -68,21 +69,21 @@ function counter(){
 }
 
 function fail(){
-	usedCards[clickEvent-1].classList.add('fail');	
+	usedCards[clickEvent-1].classList.add('fail');
 	usedCards[clickEvent].classList.add('fail');
 
 	setTimeout(function(){
 		usedCards[clickEvent-1].firstElementChild.className = 'hidden';
-		usedCards[clickEvent].firstElementChild.className = 'hidden';	
+		usedCards[clickEvent].firstElementChild.className = 'hidden';
 		usedCards[clickEvent-1].classList.remove('fail');
 		usedCards[clickEvent].classList.remove('fail');
-	}, 1100);					
+	}, 1100);
 }
 
 function match(){
-	usedCards[clickEvent-1].classList.add('match');	
-	usedCards[clickEvent].classList.add('match'); 
-	
+	usedCards[clickEvent-1].classList.add('match');
+	usedCards[clickEvent].classList.add('match');
+
 	// shows the winner message if all cards are matched
 	setTimeout(function(){
 		youWon();
@@ -107,7 +108,7 @@ function mixCards() {
 
 	// shuffle DOMTokenList by assigning a randomized array (1 - 16) to the css order property
 	for(let i = 0; i < shuffleNumbers.length; i++){
-		allCards[i].style.order = shuffleNumbers[i]; 
+		allCards[i].style.order = shuffleNumbers[i];
 		allCards[i].classList.remove('match');
 		allCards[i].firstElementChild.className = 'hidden';
 	}
