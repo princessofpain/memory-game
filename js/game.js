@@ -3,6 +3,10 @@ let clickEvent = 0;
 let clickedCardsClasses = [];
 let usedCards = [];
 let item = [];
+let sec = 0;
+let timeCounter = 0;
+let seconds = 0;
+let minutes = 0;
 
 const field = document.querySelector('.grid-container');
 field.addEventListener('click', function(event){
@@ -27,7 +31,7 @@ function storeCards() {
 	clickEvent++;
 	if (clicked.classList.contains('card') === true){
 		if(clickEvent === 1){
-			timer();
+			timeCounter = setInterval(timer, 1000);
 		}
 		counter();
 		// identification of the clicked card and the other side of the card as child
@@ -73,15 +77,24 @@ function counter(){
 }
 
 function timer() {
-	var sec = 0;
-    function pad(val) {
+	function pad(val) {
     	return val > 9 ? val : '0' + val;
     }
-	const timeCounter = setInterval(function(){
-        document.querySelector('.seconds').innerHTML = pad(++sec%60);
-        document.querySelector('.minutes').innerHTML = pad(parseInt(sec/60,10));
-    }, 1000);
+    seconds = document.querySelector('.seconds').innerHTML = pad(++sec%60);
+    minutes = document.querySelector('.minutes').innerHTML = pad(parseInt(sec/60,10));
+}
 
+function stopTimer() {
+	clearInterval(timeCounter);
+}
+
+function resetTimer() {
+	stopTimer();
+
+	document.querySelector('.seconds').innerHTML = '00';
+    document.querySelector('.minutes').innerHTML = '00';
+
+    sec = 0;
 }
 
 function starRating() {
@@ -121,21 +134,23 @@ function match(){
 	usedCards[clickEvent-1].classList.add('match');
 	usedCards[clickEvent].classList.add('match');
 
-	// shows the winner message if all cards are matched
-	setTimeout(function(){
-		youWon();
-	}, 5000);
-}
-
-function youWon(){
 	const leftCards = document.getElementsByClassName('match');
 
 	if(leftCards.length === 16){
-		field.style.display = 'none';
-		document.querySelector('.header').style.display = 'none';
-		document.querySelector('.attempts').textContent = clickEvent + ' moves';
-		winnerMessage.style.display = 'block';
+		stopTimer();
+		// shows the winner message if all cards are matched
+		setTimeout(function(){
+			youWon();
+		}, 5000);
 	}
+}
+
+function youWon(){
+	field.style.display = 'none';
+	document.querySelector('.header').style.display = 'none';
+	document.querySelector('.attempts').textContent = clickEvent + ' moves';
+	winnerMessage.style.display = 'block';
+	document.querySelector('.timerAll').innerHTML = minutes + ':' + seconds;
 }
 
 function mixCards() {
@@ -153,6 +168,7 @@ function mixCards() {
 	clickEvent = 0;
 	counter();
 	uncheckStars();
+	resetTimer();
 }
 
 // Durstenfeld shuffle for ES6
