@@ -17,15 +17,18 @@ const playAgain = document.querySelector('#play-again');
 const winnerMessage = document.querySelector('.winner');
 playAgain.addEventListener('click', function(){
 	mixCards();
-	field.style.display = "grid";
+	field.style.display = 'grid';
 	winnerMessage.style.display = 'none';
-	document.querySelector(".header").style.display = "flex";
+	document.querySelector('.header').style.display = 'flex';
 });
 
 function storeCards() {
 	const clicked = event.target;
 	clickEvent++;
 	if (clicked.classList.contains('card') === true){
+		if(clickEvent === 1){
+			timer();
+		}
 		counter();
 		// identification of the clicked card and the other side of the card as child
 		item[clickEvent] = clicked.firstElementChild;
@@ -39,6 +42,7 @@ function storeCards() {
 		// incrementing the number of the guesses to allow max. 2
 		count++;
 
+		starRating();
 		twoCardsOpen();
 	} else {
 		// skipping and erasing all card-unrelated clickEvents
@@ -62,10 +66,43 @@ function twoCardsOpen(){
 function counter(){
 	let counter = document.querySelector('.counter');
 	if (clickEvent === 1){
-		counter.textContent = clickEvent + " move";
+		counter.textContent = clickEvent + ' move';
 	} else {
-		counter.textContent = clickEvent + " moves";
+		counter.textContent = clickEvent + ' moves';
 	}
+}
+
+function timer() {
+	var sec = 0;
+    function pad(val) {
+    	return val > 9 ? val : '0' + val;
+    }
+	const timeCounter = setInterval(function(){
+        document.querySelector('.seconds').innerHTML = pad(++sec%60);
+        document.querySelector('.minutes').innerHTML = pad(parseInt(sec/60,10));
+    }, 1000);
+
+}
+
+function starRating() {
+	if(clickEvent > 20 && clickEvent < 30){
+		document.querySelector('.three').classList.add('unchecked');
+		document.querySelector('.numberStars').textContent = '2';
+	} else if (clickEvent > 30 && clickEvent < 40) {
+		document.querySelector('.two').classList.add('unchecked');
+		document.querySelector('.numberStars').textContent = '1';
+	} else if (clickEvent > 40) {
+		document.querySelector('.one').classList.add('unchecked');
+		document.querySelector('.numberStars').textContent = '0';
+	} else {
+		document.querySelector('.numberStars').textContent = '3';
+	}
+}
+
+function uncheckStars() {
+	document.querySelector('.three').classList.remove('unchecked');
+	document.querySelector('.two').classList.remove('unchecked');
+	document.querySelector('.one').classList.remove('unchecked');
 }
 
 function fail(){
@@ -95,7 +132,8 @@ function youWon(){
 
 	if(leftCards.length === 16){
 		field.style.display = 'none';
-		document.querySelector(".header").style.display = "none";
+		document.querySelector('.header').style.display = 'none';
+		document.querySelector('.attempts').textContent = clickEvent + ' moves';
 		winnerMessage.style.display = 'block';
 	}
 }
@@ -114,6 +152,7 @@ function mixCards() {
 	}
 	clickEvent = 0;
 	counter();
+	uncheckStars();
 }
 
 // Durstenfeld shuffle for ES6

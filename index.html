@@ -6,6 +6,7 @@
 		<meta charset="utf-8" />
 		<title>Memory Game</title>
 		<link rel="stylesheet" href="css/game.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 
 	<body>
@@ -13,12 +14,18 @@
 		<h1 class="game-title">Memory Game</h1>
 
 		<div class = "header">
-			<p class = "counter">0 moves</p> 
-			<img class = "mix-cards" src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Repeat_font_awesome.svg" alt="mix" width=20px;> 
+			<span class = "fa fa-star one"></span>
+			<span class = "fa fa-star two"></span>
+			<span class = "fa fa-star three"></span>
+			<p class = "counter">0 moves</p>
+			<img class = "mix-cards" src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Repeat_font_awesome.svg" alt="mix" width=20px;>
+			<div class = "timer">
+				<label class = "minutes">00</label>:<label class = "seconds">00</label>
+			</div>
 		</div>
 
 		<div class = "grid-container" class = "freeze">
-		
+
 			<div class = "card tiger">
 				<div class = "hidden">
 					<img class ="icon" src = "http://great-art.de/bilder/kategorien/Tiere_2.jpg" alt ="tiger">
@@ -115,10 +122,10 @@
 				</div>
 			</div>
 
-		</div>	
+		</div>
 
 		<div class = "winner">
-			<h2>Congratulations, you won!</h2>
+			<h2>Congratulations, you won with <span class = "attempts">0 moves</span> and <span class = "numberStars">3</span> stars in <span class = "timerAll">00:00</span> minutes !</h2>
 			<p>Do you want to play again?</p>
 			<button type = "button" id = "play-again">Play again</button>
 		</div>
