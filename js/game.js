@@ -7,16 +7,16 @@ let sec = 0;
 let timeCounter = 0;
 let seconds = 0;
 let minutes = 0;
-let countEvent = 0;
 
 const field = document.querySelector('.grid-container');
-field.addEventListener('click', function(event){
+field.addEventListener('click', handler);
+
+function handler(event){
 	event.preventDefault();
-	countEvent++;
-	if(countEvent <= 2){
+	if(count <= 1){
 		startGame();
 	}
-});
+}
 
 const mix = document.querySelector('.mix-cards');
 mix.addEventListener('click', mixCards);
@@ -70,8 +70,6 @@ function twoCardsOpen(){
 		} else {
 			match();
 		}
-		// count has to be set to 0 to allow 2 guesses max.
-		count = 0;
 	}
 }
 
@@ -135,12 +133,18 @@ function fail(){
 		usedCards[clickEvent].firstElementChild.className = 'hidden';
 		usedCards[clickEvent-1].classList.remove('fail');
 		usedCards[clickEvent].classList.remove('fail');
-	}, 1100);
+
+		count = 0;
+	}, 1500);
 }
 
 function match(){
 	usedCards[clickEvent-1].classList.add('match');
 	usedCards[clickEvent].classList.add('match');
+
+	setTimeout(function(){
+		count = 0;
+	}, 1500);
 
 	const leftCards = document.getElementsByClassName('match');
 
