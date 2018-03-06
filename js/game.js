@@ -7,11 +7,15 @@ let sec = 0;
 let timeCounter = 0;
 let seconds = 0;
 let minutes = 0;
+let countEvent = 0;
 
 const field = document.querySelector('.grid-container');
 field.addEventListener('click', function(event){
 	event.preventDefault();
-	storeCards();
+	countEvent++;
+	if(countEvent <= 2){
+		startGame();
+	}
 });
 
 const mix = document.querySelector('.mix-cards');
@@ -26,7 +30,7 @@ playAgain.addEventListener('click', function(){
 	document.querySelector('.header').style.display = 'flex';
 });
 
-function storeCards() {
+function startGame() {
 	const clicked = event.target;
 	clickEvent++;
 	if (clicked.classList.contains('card') === true){
@@ -34,24 +38,28 @@ function storeCards() {
 			timeCounter = setInterval(timer, 1000);
 		}
 		counter();
-		// identification of the clicked card and the other side of the card as child
-		item[clickEvent] = clicked.firstElementChild;
-		item[clickEvent].className = 'visible';
-
-		// storing the class name of the recently clicked card in an array
-		clickedCardsClasses[clickEvent] = clicked.className;
-		// storing the clicked element in an array
-		usedCards[clickEvent] = clicked;
-
-		// incrementing the number of the guesses to allow max. 2
-		count++;
 
 		starRating();
+		turnCard(clicked);
 		twoCardsOpen();
 	} else {
 		// skipping and erasing all card-unrelated clickEvents
 		clickEvent--;
 	}
+}
+
+function turnCard(clicked){
+	// identification of the clicked card and the other side of the card as child
+	item[clickEvent] = clicked.firstElementChild;
+	item[clickEvent].className = 'visible';
+
+	// storing the class name of the recently clicked card in an array
+	clickedCardsClasses[clickEvent] = clicked.className;
+	// storing the clicked element in an array
+	usedCards[clickEvent] = clicked;
+
+	// incrementing the number of the guesses to allow max. 2
+	count++;
 }
 
 function twoCardsOpen(){
@@ -98,13 +106,13 @@ function resetTimer() {
 }
 
 function starRating() {
-	if(clickEvent > 20 && clickEvent < 30){
+	if(clickEvent > 30 && clickEvent < 40){
 		document.querySelector('.three').classList.add('unchecked');
 		document.querySelector('.numberStars').textContent = '2';
-	} else if (clickEvent > 30 && clickEvent < 40) {
+	} else if (clickEvent > 40 && clickEvent < 50) {
 		document.querySelector('.two').classList.add('unchecked');
 		document.querySelector('.numberStars').textContent = '1';
-	} else if (clickEvent > 40) {
+	} else if (clickEvent > 50) {
 		document.querySelector('.one').classList.add('unchecked');
 		document.querySelector('.numberStars').textContent = '0';
 	} else {
@@ -141,7 +149,7 @@ function match(){
 		// shows the winner message if all cards are matched
 		setTimeout(function(){
 			youWon();
-		}, 5000);
+		}, 3000);
 	}
 }
 

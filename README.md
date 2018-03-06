@@ -2,7 +2,13 @@
 
 A funny memory game to find card pairs.
 
-## How to play
+##Run the project
+
+Download or clone the repo and open the index.html file in a browser.
+
+##About the game
+
+###How to play
 
 1. Click on a card to start the game.
 1. Click on another card to find a pair.
@@ -11,7 +17,7 @@ You will either have a match (green color) or a fail (red color). Matched pairs 
 
 Repeat the steps until you found all pairs.
 
-## Rating
+###Rating
 
 The stars show how good your game was:
 
